@@ -29,8 +29,18 @@
           <div class="item-label">Avatar:</div>
           <div class="item-value">
             <div class="avatar-preview-mini">
-              <img v-if="userIconUrl" :src="userIconUrl" />
-              <img v-else-if="avatar" :src="avatar" />
+              <img
+                decoding="async"
+                loading="lazy"
+                v-if="userIconUrl"
+                :src="userIconUrl"
+              />
+              <img
+                decoding="async"
+                loading="lazy"
+                v-else-if="avatar"
+                :src="avatar"
+              />
             </div>
           </div>
         </li>
@@ -40,8 +50,13 @@
         </li>
       </ul>
       <div class="avatar-preview">
-        <img v-if="userIconUrl" :src="userIconUrl" />
-        <img v-else-if="avatar" :src="avatar" />
+        <img
+          decoding="async"
+          loading="lazy"
+          v-if="userIconUrl"
+          :src="userIconUrl"
+        />
+        <img decoding="async" loading="lazy" v-else-if="avatar" :src="avatar" />
       </div>
     </div>
   </section>
@@ -138,5 +153,10 @@ $successBgColor: #a1cc79;
   align-items: center;
   justify-content: center;
   background-color: $borderLightColor;
+
+  img {
+    content-visibilit: auto;
+    background-size: cover;
+  }
 }
 </style>

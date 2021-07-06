@@ -62,7 +62,6 @@ export default defineComponent({
     const toggleMobileMenu = () =>
       (isOpenMobileMenu.value = !isOpenMobileMenu.value);
 
-    console.log(route.params);
     return {
       isOpenMobileMenu,
       toggleMobileMenu,

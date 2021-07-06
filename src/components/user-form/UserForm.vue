@@ -137,8 +137,18 @@
               name="avatar"
             />
             <div class="avatar-preview-mini">
-              <img v-if="userIconUrl" :src="userIconUrl" />
-              <img v-else-if="avatar" :src="avatar" />
+              <img
+                decoding="async"
+                loading="lazy"
+                v-if="userIconUrl"
+                :src="userIconUrl"
+              />
+              <img
+                decoding="async"
+                loading="lazy"
+                v-else-if="avatar"
+                :src="avatar"
+              />
             </div>
             <span></span>
             <span class="avatar-arrow-left"></span>
@@ -165,8 +175,13 @@
         </div>
       </form>
       <div class="avatar-preview">
-        <img v-if="userIconUrl" :src="userIconUrl" />
-        <img v-else-if="avatar" :src="avatar" />
+        <img
+          decoding="async"
+          loading="lazy"
+          v-if="userIconUrl"
+          :src="userIconUrl"
+        />
+        <img decoding="async" loading="lazy" v-else-if="avatar" :src="avatar" />
       </div>
     </div>
   </section>
@@ -501,6 +516,8 @@ $successBgColor: #a1cc79;
 
   img {
     width: 60%;
+    content-visibilit: auto;
+    background-size: cover;
   }
 }
 
@@ -534,6 +551,8 @@ $successBgColor: #a1cc79;
   max-width: 450px;
   box-sizing: border-box;
   margin: $generalDistance * 2 0 0 auto;
+  content-visibilit: auto;
+  background-size: cover;
 
   @media all and (max-width: $breakpointMediumDevices - 1) {
     display: flex;
