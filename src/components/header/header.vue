@@ -33,7 +33,9 @@
       >
         <ul class="navbar-navigation">
           <li class="navigation-item">
-            <router-link class="navigation-link" to="/">Profile</router-link>
+            <router-link disabled="true" class="navigation-link" to="/"
+              >Profile</router-link
+            >
           </li>
           <li class="navigation-item">
             <router-link class="navigation-link" to="/user-form"
@@ -72,11 +74,19 @@ export default defineComponent({
 <style lang="scss">
 $generalFontSize: 16px;
 $generalDistance: 12px;
-$breakpointMobile: 768px;
+
+$breakpointSmallDevices: 576px;
+$breakpointMediumDevices: 768px;
+$breakpointLargeDevices: 992px;
 $contentMaxWidth: 1320px;
 
-$mainBgColor: #595964;
-$lightMainBgColor: #8b8b9d;
+$textColor: #595964;
+$lighttextColor: #8b8b9d;
+$whiteColor: #ffffff;
+$borderColor: gray;
+$borderLightColor: #eee;
+$errorColor: red;
+$successBgColor: #a1cc79;
 
 .navbar {
   font-size: $generalFontSize;
@@ -86,7 +96,7 @@ $lightMainBgColor: #8b8b9d;
   justify-content: flex-start;
   align-items: center;
   padding: $generalDistance 0;
-  background-color: $mainBgColor;
+  background-color: $textColor;
 
   &-container {
     display: flex;
@@ -101,28 +111,27 @@ $lightMainBgColor: #8b8b9d;
     padding-left: $generalDistance;
     box-sizing: border-box;
 
-    @media all and (max-width: $breakpointMobile - 1) {
+    @media all and (max-width: $breakpointMediumDevices - 1) {
       flex-wrap: wrap;
     }
   }
 
   &-logo {
     padding: 0;
-    margin-right: $generalDistance/2; //0.25rem
+    margin-right: ($generalDistance/2); //0.25rem
     text-decoration: none;
     white-space: nowrap;
 
     img {
-      margin-top: $generalDistance/2;
-      margin-left: -$generalDistance/2;
-      //   margin-bottom: 8px;
+      margin-top: ($generalDistance/2);
+      margin-left: (-$generalDistance/2);
     }
   }
 
   &-toggler {
     display: block;
 
-    @media all and (min-width: $breakpointMobile) {
+    @media all and (min-width: $breakpointMediumDevices) {
       display: none;
     }
   }
@@ -133,7 +142,7 @@ $lightMainBgColor: #8b8b9d;
     flex-grow: 1;
     align-items: center;
 
-    @media all and (max-width: $breakpointMobile - 1) {
+    @media all and (max-width: $breakpointMediumDevices - 1) {
       display: none;
     }
 
@@ -142,10 +151,10 @@ $lightMainBgColor: #8b8b9d;
       flex-basis: 100%;
       flex-grow: 1;
 
-      @media all and (max-width: $breakpointMobile - 1) {
-        background-color: $lightMainBgColor;
+      @media all and (max-width: $breakpointMediumDevices - 1) {
+        background-color: $lighttextColor;
         margin: 0 (-$generalDistance) (-$generalDistance);
-        color: $mainBgColor;
+        color: $textColor;
       }
     }
   }
@@ -159,7 +168,7 @@ $lightMainBgColor: #8b8b9d;
     padding-bottom: 0;
     padding-left: 0;
 
-    @media all and (max-width: $breakpointMobile - 1) {
+    @media all and (max-width: $breakpointMediumDevices - 1) {
       width: 100%;
       padding-left: 0px;
     }
@@ -170,20 +179,34 @@ $lightMainBgColor: #8b8b9d;
   &-item {
     flex: 0 0 auto;
     width: auto;
+    border-bottom: 3px solid transparent;
 
-    @media all and (max-width: $breakpointMobile - 1) {
+    &:hover {
+      border-bottom: 3px solid #eee;
+
+      @media all and (max-width: $breakpointMediumDevices - 1) {
+        border-bottom-width: 0;
+      }
+    }
+
+    @media all and (max-width: $breakpointMediumDevices - 1) {
       width: 100%;
       padding-left: 0px;
+      border-bottom-width: 0;
     }
   }
 
   &-link {
     display: block;
     text-decoration: none;
-    padding: $generalDistance/2 $generalDistance;
+    padding: ($generalDistance/2) $generalDistance;
     color: #ffffff;
     font-weight: 600;
     font-size: $generalFontSize;
+
+    @media all and (max-width: $breakpointMediumDevices - 1) {
+      text-align: center;
+    }
   }
 }
 </style>

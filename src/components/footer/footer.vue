@@ -8,7 +8,7 @@
       </ul>
     </div>
     <div class="footer-disclamer">
-      <span>Lorem ipsum dolor</span>
+      <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
     </div>
   </footer>
 </template>
@@ -24,30 +24,48 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-$breakpointMobile: 768px;
+$generalFontSize: 16px;
+$generalDistance: 12px;
+
+$breakpointSmallDevices: 576px;
+$breakpointMediumDevices: 768px;
+$breakpointLargeDevices: 992px;
+$contentMaxWidth: 1320px;
+
+$textColor: #595964;
+$lighttextColor: #8b8b9d;
+$whiteColor: #ffffff;
+$borderColor: gray;
+$borderLightColor: #eee;
+$errorColor: red;
+$successBgColor: #a1cc79;
 
 .footer {
-  background-color: #595964;
-  padding: 12px;
+  background-color: $textColor;
+  padding: $generalDistance;
   display: flex;
   flex-wrap: wrap;
 }
+
 .footer-links,
 .footer-disclamer {
   flex: 0 0 auto;
   width: 50%;
   align-self: center;
 
-  @media all and (max-width: $breakpointMobile - 1) {
+  @media all and (max-width: $breakpointMediumDevices - 1) {
     width: 100%;
+    text-align: center;
   }
 }
 
-.footer-links {
-}
-
 .footer-disclamer {
-  color: #ffffff;
+  color: $whiteColor;
+  text-align: right;
+
+  @media all and (max-width: $breakpointMediumDevices - 1) {
+    text-align: center;
+  }
 }
 
 .links-container {
@@ -59,17 +77,31 @@ $breakpointMobile: 768px;
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 0;
+
+  @media all and (max-width: $breakpointMediumDevices - 1) {
+    justify-content: center;
+  }
 }
 
 .links-item {
   flex: 0 0 auto;
   width: auto;
   list-style: none;
+
+  padding: $generalDistance/2;
+  margin: 0 $generalDistance;
+  padding: 6px;
+  margin: 0 12px;
+  border-bottom: 3px solid transparent;
+
+  &:hover {
+    border-bottom: 3px solid #eee;
+  }
 }
 
 .links-link {
-  padding: 8px;
+  padding: $generalDistance/2;
   text-decoration: none;
-  color: #ffffff;
+  color: $borderLightColor;
 }
 </style>

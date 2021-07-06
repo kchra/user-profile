@@ -71,6 +71,7 @@ $generalDistance: 12px;
 $itemLineHeight: 50px;
 
 $textColor: #595964;
+$lighttextColor: #8b8b9d;
 $whiteColor: #ffffff;
 $borderColor: gray;
 $borderLightColor: #eee;
@@ -86,6 +87,7 @@ $successBgColor: #a1cc79;
 .profile-container {
   font-size: $generalFontSize;
   display: flex;
+  margin-bottom: $generalDistance * 2;
 }
 
 .profile,

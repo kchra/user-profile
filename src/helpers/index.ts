@@ -1,3 +1,5 @@
+import { UserInterface } from "@/types";
+
 export const isEmpty = (
   obj: { [s: string]: unknown } | ArrayLike<unknown>
 ): boolean => !Object.entries(obj).length;
@@ -21,3 +23,6 @@ export const compareObjects = (
 
   return true;
 };
+
+export const hasEmptyValues = (obj: { [s: string]: unknown; } | UserInterface): boolean =>
+  Object.values(obj).every((x) => x === null || x === "");

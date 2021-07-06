@@ -22,34 +22,40 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+$generalFontSize: 16px;
+$generalDistance: 12px;
+$generalBorderRadius: 5px;
+
+$contentMaxWidth: 1320px;
+
+$textColor: #595964;
+$whiteColor: #ffffff;
+$borderColor: gray;
+$borderLightColor: #eee;
+$errorColor: red;
+$successBgColor: #a1cc79;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  font-size: $generalFontSize;
+  color: $textColor;
 }
 
 .main {
-  max-width: 1320px;
+  max-width: $contentMaxWidth;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 12px;
-  padding-left: 12px;
+  padding-right: $generalDistance;
+  padding-left: $generalDistance;
   box-sizing: border-box;
 }
 </style>

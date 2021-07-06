@@ -1,29 +1,29 @@
 import { reactive } from "vue";
+import { UserInterface } from "@/types";
 
-interface UserInterface {
-  fisrtName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  birthday: Date;
-  avatar?: string;
-  about?: string;
-}
+let storageData = reactive<UserInterface>({
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  birthday: "",
+  avatar: "",
+  about: "",
+});
 
-interface UndefinedObjInterface {
-  [s: string]: undefined;
-}
-
-let storageData = reactive<UserInterface | UndefinedObjInterface>({});
-
-function useReturnLocalStorageData(): UserInterface | UndefinedObjInterface {
+function useReturnLocalStorageData(): UserInterface {
   useUpdateStorageData("user");
   return storageData;
 }
 
-function useGetLocalStorage(
-  localStorageName: string
-): UserInterface | UndefinedObjInterface {
+function useGetLocalStorage(localStorageName: string): UserInterface {
+  if (!useLocalStorageExists(localStorageName)) {
+    try {
+      useSetLocalStorage(localStorageName, storageData);
+    } catch {
+      useRemoveLocalStorage(localStorageName);
+    }
+  }
   return JSON.parse(localStorage.getItem(localStorageName) as string);
 }
 

@@ -27,10 +27,9 @@
               class="field-value"
               type="text"
               name="firstName"
-              placeholder="John"
+              placeholder="e.g. John"
               v-model="firstName"
               @blur="v.firstName.$touch()"
-              :disabled="isSaveButtonDisabled"
             />
             <div
               class="field-errors"
@@ -53,10 +52,9 @@
               class="field-value"
               type="text"
               name="lastName"
-              placeholder="Doe"
+              placeholder="e.g. Doe"
               v-model="lastName"
               @blur="v.lastName.$touch()"
-              :disabled="isSaveButtonDisabled"
             />
             <div
               class="field-errors"
@@ -79,10 +77,9 @@
               class="field-value"
               type="email"
               name="email"
-              placeholder="john.doe@example.com"
+              placeholder="e.g. john.doe@example.com"
               v-model="email"
               @blur="v.email.$touch()"
-              :disabled="isSaveButtonDisabled"
             />
             <div
               class="field-errors"
@@ -105,10 +102,9 @@
               class="field-value"
               type="text"
               name="phone"
-              placeholder="+48 777 666 555"
+              placeholder="e.g. +48 777 666 555"
               v-model="phone"
               @blur="v.phone.$touch()"
-              :disabled="isSaveButtonDisabled"
             />
             <div
               class="field-errors"
@@ -128,7 +124,7 @@
               class="field-value"
               name="birthday"
               v-model="birthday"
-              :disabled="isSaveButtonDisabled"
+              placeholder="e.g 1961-07-21"
             />
             <span></span>
           </li>
@@ -139,7 +135,6 @@
               type="file"
               @change="onFileChange"
               name="avatar"
-              :disabled="isSaveButtonDisabled"
             />
             <div class="avatar-preview-mini">
               <img v-if="userIconUrl" :src="userIconUrl" />
@@ -154,7 +149,6 @@
               class="field-value"
               v-model="about"
               name="about"
-              :disabled="isSaveButtonDisabled"
             ></textarea>
             <span></span>
           </li>
@@ -198,7 +192,7 @@ import {
   useRemoveLocalStorage,
   useLocalStorageExists,
 } from "@/use/localStorage";
-import { compareObjects } from "@/helpers";
+import { compareObjects, hasEmptyValues } from "@/helpers";
 import { LOCAL_STORAGE_NAME, BREAKPOINTS } from "@/constans";
 
 export default defineComponent({
@@ -220,8 +214,13 @@ export default defineComponent({
     const isSaveButtonDisabled = computed(
       () => v.value.$invalid || isGeneralMessage.value
     );
+
     const saveButtonValue = computed(() =>
-      isGeneralMessage.value ? "Data have been saved..." : "Save"
+      v.value.$invalid
+        ? "Form contains errors ..."
+        : isGeneralMessage.value
+        ? "Data have been saved..."
+        : "Save"
     );
 
     const isBreakpoint = computed(() => {
@@ -294,18 +293,7 @@ export default defineComponent({
       }
     };
 
-    /** check if "user" localstorage exist if not is creating empty "user" */
     onMounted(() => {
-      if (!useLocalStorageExists(LOCAL_STORAGE_NAME)) {
-        try {
-          useSetLocalStorage(LOCAL_STORAGE_NAME, userData.value);
-        } catch {
-          useRemoveLocalStorage(LOCAL_STORAGE_NAME);
-        }
-      } else {
-        userData.value = useGetLocalStorage(LOCAL_STORAGE_NAME);
-      }
-
       window.addEventListener("resize", () => {
         screenWidth.value = window.innerWidth;
       });
@@ -343,6 +331,7 @@ $breakpointLargeDevices: 992px;
 $contentMaxWidth: 1320px;
 
 $textColor: #595964;
+$lighttextColor: #8b8b9d;
 $whiteColor: #ffffff;
 $borderColor: gray;
 $borderLightColor: #eee;
@@ -370,6 +359,7 @@ $successBgColor: #a1cc79;
 .form-container {
   display: flex;
   position: relative;
+  margin-bottom: $generalDistance * 2;
 
   > * {
     flex: 50%;
@@ -450,7 +440,7 @@ $successBgColor: #a1cc79;
   .field-containter.error & {
     color: $errorColor;
     font-size: 0.75rem;
-    line-height: $fieldLineHeight / 2;
+    line-height: ($fieldLineHeight / 2);
   }
 }
 
@@ -470,7 +460,7 @@ $successBgColor: #a1cc79;
 }
 
 .form-actions {
-  padding: $generalDistance $generalDistance * 2 $generalDistance * 2
+  padding: $generalDistance ($generalDistance * 2) ($generalDistance * 2)
     $generalDistance;
   box-sizing: border-box;
 }
@@ -483,12 +473,13 @@ $successBgColor: #a1cc79;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  padding: $generalDistance/2 $generalDistance;
+  padding: $generalDistance;
   font-size: $generalFontSize;
   width: 100%;
   border-radius: $generalBorderRadius;
   border-width: 1px;
   border-style: solid;
+  font-weight: 700;
 
   color: #fff;
   background-color: #0d6efd;
@@ -520,7 +511,7 @@ $successBgColor: #a1cc79;
   border-bottom: 25px solid transparent;
   position: absolute;
   right: 0;
-  border-right: $generalDistance * 2 solid $borderLightColor;
+  border-right: ($generalDistance * 2) solid $borderLightColor;
 
   @media all and (min-width: $breakpointMediumDevices) {
     bottom: 13px;
