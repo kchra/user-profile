@@ -234,6 +234,7 @@ export default defineComponent({
       () => v.value.$invalid || isGeneralMessage.value
     );
 
+    /** computed variable containing different messages(values) depends on */
     const saveButtonValue = computed(() =>
       !v.value.$errors.length && v.value.$invalid
         ? "Fill in the filds first ..."
@@ -265,8 +266,6 @@ export default defineComponent({
 
     /** Inicialize of validation */
     const v = initVuelidate(user);
-
-    console.log("v", v.value);
 
     /** Because of v-model dosn't support file type input we have to provide function for managing this value */
     const onFileChange = (event) => {

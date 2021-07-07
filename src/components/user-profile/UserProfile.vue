@@ -87,7 +87,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $generalFontSize: 16px;
 $generalDistance: 12px;
 $itemLineHeight: 50px;
