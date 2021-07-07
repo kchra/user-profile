@@ -121,6 +121,7 @@
               >Birthday:</label
             >
             <Datepicker
+              :class="$style.fieldValue"
               class="field-value"
               name="birthday"
               v-model="birthday"
@@ -582,6 +583,59 @@ $successBgColor: #a1cc79;
 
   @media all and (max-width: $breakpointSmallDevices - 1) {
     margin-left: 0;
+    max-width: 100%;
+  }
+}
+</style>
+
+<style lang="scss" module>
+$fieldLineHeight: 50px;
+$formMaxWidth: 500px;
+$fieldWidth: 450px;
+$descriptionMinWidth: 100px;
+$generalFontSize: 16px;
+$generalDistance: 12px;
+$generalBorderRadius: 5px;
+
+$breakpointSmallDevices: 576px;
+$breakpointMediumDevices: 768px;
+$breakpointLargeDevices: 992px;
+$contentMaxWidth: 1320px;
+
+$textColor: #595964;
+$lighttextColor: #8b8b9d;
+$whiteColor: #ffffff;
+$borderColor: gray;
+$borderLightColor: #eee;
+$errorColor: red;
+$successBgColor: #a1cc79;
+
+.field-value,
+.fieldValue {
+  box-sizing: border-box;
+  margin-left: auto;
+  max-width: $fieldWidth;
+  width: 100%;
+  padding: $generalDistance;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $generalBorderRadius;
+  border-color: $borderLightColor;
+  font-size: $generalFontSize;
+
+  .field-containter.error & {
+    border-color: $errorColor;
+  }
+
+  &:-moz-placeholder {
+    color: $borderColor;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $borderColor;
+  }
+
+  @media all and (max-width: $breakpointSmallDevices - 1) {
     max-width: 100%;
   }
 }
