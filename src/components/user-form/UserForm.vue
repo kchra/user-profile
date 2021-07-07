@@ -338,7 +338,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $fieldLineHeight: 50px;
 $formMaxWidth: 500px;
 $fieldWidth: 450px;
