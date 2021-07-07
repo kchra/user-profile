@@ -175,13 +175,20 @@
         </div>
       </form>
       <div class="avatar-preview">
-        <img
-          decoding="async"
-          loading="lazy"
-          v-if="userIconUrl"
-          :src="userIconUrl"
-        />
-        <img decoding="async" loading="lazy" v-else-if="avatar" :src="avatar" />
+        <div class="avatar-container">
+          <img
+            decoding="async"
+            loading="lazy"
+            v-if="userIconUrl"
+            :src="userIconUrl"
+          />
+          <img
+            decoding="async"
+            loading="lazy"
+            v-else-if="avatar"
+            :src="avatar"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -202,12 +209,9 @@ import Datepicker from "vue3-datepicker";
 import { initVuelidate } from "@/components/user-form/useUserForm";
 import {
   useReturnLocalStorageData,
-  useGetLocalStorage,
   useSetLocalStorage,
-  useRemoveLocalStorage,
-  useLocalStorageExists,
 } from "@/use/localStorage";
-import { compareObjects, hasEmptyValues } from "@/helpers";
+import { compareObjects } from "@/helpers";
 import { LOCAL_STORAGE_NAME, BREAKPOINTS } from "@/constans";
 
 export default defineComponent({
@@ -231,7 +235,9 @@ export default defineComponent({
     );
 
     const saveButtonValue = computed(() =>
-      v.value.$invalid
+      !v.value.$errors.length && v.value.$invalid
+        ? "Fill in the filds first ..."
+        : v.value.$invalid
         ? "Form contains errors ..."
         : isGeneralMessage.value
         ? "Data have been saved..."
@@ -259,6 +265,8 @@ export default defineComponent({
 
     /** Inicialize of validation */
     const v = initVuelidate(user);
+
+    console.log("v", v.value);
 
     /** Because of v-model dosn't support file type input we have to provide function for managing this value */
     const onFileChange = (event) => {
@@ -514,10 +522,25 @@ $successBgColor: #a1cc79;
   background-color: $borderLightColor;
   margin-right: $generalDistance;
 
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    max-width: 360px;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    background-color: $whiteColor;
+    content: "avatar";
+  }
+
   img {
-    width: 60%;
     content-visibilit: auto;
     background-size: cover;
+    width: 100%;
+
+    @media all and (max-width: $breakpointMediumDevices - 1) {
+      width: 60%;
+    }
   }
 }
 

@@ -50,13 +50,20 @@
         </li>
       </ul>
       <div class="avatar-preview">
-        <img
-          decoding="async"
-          loading="lazy"
-          v-if="userIconUrl"
-          :src="userIconUrl"
-        />
-        <img decoding="async" loading="lazy" v-else-if="avatar" :src="avatar" />
+        <div class="avatar-container">
+          <img
+            decoding="async"
+            loading="lazy"
+            v-if="userIconUrl"
+            :src="userIconUrl"
+          />
+          <img
+            decoding="async"
+            loading="lazy"
+            v-else-if="avatar"
+            :src="avatar"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -92,6 +99,11 @@ $borderColor: gray;
 $borderLightColor: #eee;
 $errorColor: red;
 $successBgColor: #a1cc79;
+
+$breakpointSmallDevices: 576px;
+$breakpointMediumDevices: 768px;
+$breakpointLargeDevices: 992px;
+$contentMaxWidth: 1320px;
 
 .page-header {
   text-align: left;
@@ -148,15 +160,51 @@ $successBgColor: #a1cc79;
   font-weight: bold;
 }
 
-.avatar-preview {
+.avatar-preview,
+.avatar-preview-mini {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $borderLightColor;
 
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    max-width: 360px;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    background-color: $whiteColor;
+    content: "avatar";
+  }
+
   img {
     content-visibilit: auto;
     background-size: cover;
+    width: 100%;
+
+    @media all and (max-width: $breakpointMediumDevices - 1) {
+      width: 60%;
+    }
+  }
+}
+
+.avatar-preview-mini {
+  display: none;
+  padding: 24px;
+  max-width: 450px;
+  box-sizing: border-box;
+  margin: $generalDistance * 2 0 0 auto;
+  content-visibilit: auto;
+  background-size: cover;
+
+  @media all and (max-width: $breakpointMediumDevices - 1) {
+    display: flex;
+  }
+
+  @media all and (max-width: $breakpointSmallDevices - 1) {
+    margin-left: 0;
+    max-width: 100%;
   }
 }
 </style>
