@@ -189,6 +189,12 @@ $contentMaxWidth: 1320px;
   }
 }
 
+.avatar-preview {
+  @media all and (max-width: $breakpointMediumDevices - 1) {
+    display: none !important;
+  }
+}
+
 .avatar-preview-mini {
   display: none;
   padding: 24px;
