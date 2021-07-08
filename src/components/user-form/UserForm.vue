@@ -534,7 +534,8 @@ $successBgColor: #a1cc79;
 
   img {
     content-visibilit: auto;
-    background-size: cover;
+    object-fit: cover;
+    object-position: center;
     width: 100%;
 
     @media all and (max-width: $breakpointMediumDevices - 1) {
